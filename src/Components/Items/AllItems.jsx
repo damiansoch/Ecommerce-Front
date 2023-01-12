@@ -6,7 +6,6 @@ import Item from './Item';
 
 const AllItems = () => {
   const [allItems, setAllItems] = useState([]);
-  console.log(allItems);
   useEffect(() => {
     axios
       .get('https://localhost:7172/api/Items/0,10', {

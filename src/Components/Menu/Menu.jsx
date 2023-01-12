@@ -11,9 +11,15 @@ const Menu = () => {
         <Container>
           <Navbar.Brand>SellerApp</Navbar.Brand>
           <Nav className="me-auto">
-            <Link to="/AllItems">All Items</Link>
-            <Link to="">Features</Link>
-            <Link to="">Pricing</Link>
+            <Link className="ms-2 text-dark" to="/AllItems">
+              All
+            </Link>
+            <Link className="ms-2 text-dark" to="">
+              Features
+            </Link>
+            <Link className="ms-2 text-dark" to="/SellItem">
+              Sell
+            </Link>
           </Nav>
         </Container>
       </Navbar>

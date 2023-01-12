@@ -1,9 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+
 import Card from 'react-bootstrap/Card';
+
 import ListGroup from 'react-bootstrap/ListGroup';
 
+import { Link } from 'react-router-dom';
+
+import ItemContext from '../../Context/ItemContext';
+
 const Item = ({ item }) => {
+  const { setItemId } = useContext(ItemContext);
+
   const [imagePath, setImagePath] = useState('');
+  const dateFirstPosted = item.dateAdded.split('T')[0];
 
   useEffect(() => {
     if (item.image.length > 0) {
@@ -19,23 +28,31 @@ const Item = ({ item }) => {
 
   return (
     <div className="my-5 mx-2">
-      <Card style={{ width: '256px' }}>
-        <Card.Img
-          height={'150px'}
-          src={imagePath}
-          alt="img"
-          style={{ heigth: '150px' }}
-        />
-        <Card.Body>
+      <Card style={{ width: '200px' }}>
+        <Card.Img variant="top" height={'150px'} src={imagePath} alt="img" />
+        <Card.Body className="text-center">
           <Card.Title>{item.name}</Card.Title>
         </Card.Body>
         <ListGroup className="list-group-flush">
-          <ListGroup.Item>€{item.itemPrice}</ListGroup.Item>
-          <ListGroup.Item>{item.dateAdded}</ListGroup.Item>
+          <ListGroup.Item>
+            <small>€{item.itemPrice}</small>
+          </ListGroup.Item>
+          <ListGroup.Item>
+            <small>{dateFirstPosted}</small>
+          </ListGroup.Item>
         </ListGroup>
         <Card.Body>
-          <Card.Link href="#">Card Link</Card.Link>
-          <Card.Link href="#">Another Link</Card.Link>
+          <Link
+            className="text-black"
+            to="/ItemDetails"
+            onClick={() => {
+              setItemId(item.id);
+
+              localStorage.setItem('itemId', JSON.stringify(item.id));
+            }}
+          >
+            Details
+          </Link>
         </Card.Body>
       </Card>
     </div>
